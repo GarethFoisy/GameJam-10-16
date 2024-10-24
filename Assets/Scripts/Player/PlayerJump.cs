@@ -21,4 +21,9 @@ public class PlayerJump : Interactor
             movement.SetJump(jumpVelocity);
         }
     }
+
+    public override void OnStart()
+    {
+        Debug.Log("Jump");
+    }
 }
