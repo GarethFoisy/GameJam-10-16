@@ -11,6 +11,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private bool invertMouse;
 
     private float camXRotation;
+    private float camYRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,9 @@ public class CameraMovement : MonoBehaviour
         camXRotation += Time.deltaTime * input.mouseY * turnSpeed * (invertMouse ? 1 : -1);
         camXRotation = Mathf.Clamp(camXRotation, -75f, 75f);
 
-        transform.localRotation = Quaternion.Euler(camXRotation, 0, 0);
+        camYRotation += Time.deltaTime * input.mouseX * turnSpeed;
+
+        transform.localRotation = Quaternion.Euler(camXRotation, camYRotation, transform.localRotation.z);
     }
 
     //A method to lock and unlock the cursor in runtime depending if they are in game or in menu
