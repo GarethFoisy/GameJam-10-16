@@ -40,4 +40,9 @@ public class BombInteractor : Interactor
             isPicked = false;
         }
     }
+
+    public override void OnStart()
+    {
+        throw new System.NotImplementedException();
+    }
 }

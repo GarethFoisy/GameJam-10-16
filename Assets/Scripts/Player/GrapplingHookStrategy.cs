@@ -22,6 +22,7 @@ public class GrapplingHookStrategy : Interactor
     // Start is called before the first frame update
     public override void OnStart()
     {
+        playerCam = Camera.main.transform;
         playerMovement = GetComponent<PlayerMovement>();
     }
 
