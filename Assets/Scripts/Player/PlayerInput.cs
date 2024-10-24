@@ -11,8 +11,10 @@ public class PlayerInput : MonoBehaviour
     public float mouseY { get; private set; }
     public bool sprintHeld { get; private set; }
     public bool jumpPressed { get; private set; }
+    public bool shootPressed { get; private set; }
     public bool activatePressed {get; private set; }
     public bool throwPressed {get; private set; }
+
 
     private bool clear;
 
@@ -62,6 +64,7 @@ public class PlayerInput : MonoBehaviour
         sprintHeld = sprintHeld || Input.GetButton("Sprint");
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
+        shootPressed = shootPressed || Input.GetButtonDown("Fire1");
         activatePressed = activatePressed || Input.GetButtonDown("Interact");
         throwPressed = throwPressed || Input.GetButtonDown("Throw");
     }
@@ -79,6 +82,7 @@ public class PlayerInput : MonoBehaviour
         sprintHeld = false;
         jumpPressed = false;
 
+        shootPressed = false;
         activatePressed = false;
         throwPressed = false;
     }

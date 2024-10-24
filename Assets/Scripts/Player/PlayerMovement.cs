@@ -3,59 +3,68 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Interactor
 {
-    private PlayerInput input;
-    private CharacterController characterController;
 
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float playerMoveSpeed;
     [SerializeField] private float sprintMultiplier;
+    [SerializeField] private float gravity;
+
+    [Header("Ground Check")]
+    [SerializeField] private float groundDrag;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float groundCheckDistance;
 
     private float moveMultiplier = 1;
-    private Vector3 playerVelocity;
+
+    private Rigidbody playerRB;
+
+
     public bool isGrounded {  get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void OnStart()
     {
-        characterController = GetComponent<CharacterController>();
-        input = PlayerInput.GetInstance();
+        playerRB = GetComponent<Rigidbody>();
+        playerRB.freezeRotation = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact()
     {
         GroundCheck();
-        MovePlayer();
-    }
-
-    private void MovePlayer()
-    {
         moveMultiplier = input.sprintHeld ? sprintMultiplier : 1;
-        characterController.Move((transform.forward * input.vertical + transform.right * input.horizontal) * moveSpeed * Time.deltaTime * moveMultiplier);
+        Vector3 movement = Vector3.zero;
 
-        //Ground Check
-        if(isGrounded && playerVelocity.y < 0)
+        if (input.horizontal != 0 || input.vertical != 0)
         {
-            playerVelocity.y = -2f;
+            Move();
         }
 
-        playerVelocity.y += gravity * Time.deltaTime;
+        playerRB.velocity += new Vector3(movement.x, gravity * Time.deltaTime, movement.z);
+    }
 
-        characterController.Move(playerVelocity * Time.deltaTime);
+    private void Move()
+    {
+        Vector3 movement = (playerRB.transform.forward * input.vertical + playerRB.transform.right * input.horizontal);
+        playerRB.AddForce(movement.normalized * playerMoveSpeed * moveMultiplier, ForceMode.Force);
     }
 
     private void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundLayerMask);
+
+        if(isGrounded)
+        {
+            playerRB.drag = groundDrag;
+        }
+        else
+        {
+            playerRB.drag = 0;
+        }
     }
 
-    public void SetJump(float value)
+    public void SetJump(float jumpForce)
     {
-        playerVelocity.y = value;
+        playerRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 }

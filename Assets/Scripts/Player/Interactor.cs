@@ -10,6 +10,7 @@ public abstract class Interactor : MonoBehaviour
     void Start()
     {
         input = PlayerInput.GetInstance();
+        OnStart();
     }
 
     void Update()
@@ -19,4 +20,5 @@ public abstract class Interactor : MonoBehaviour
 
     public abstract void Interact();
 
+    public abstract void OnStart();
 }
