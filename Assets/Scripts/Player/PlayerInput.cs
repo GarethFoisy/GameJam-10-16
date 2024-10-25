@@ -11,9 +11,17 @@ public class PlayerInput : MonoBehaviour
     public float mouseY { get; private set; }
     public bool sprintHeld { get; private set; }
     public bool jumpPressed { get; private set; }
+    public bool jumpReleased { get; private set; }
     public bool shootPressed { get; private set; }
+    public bool shootHeld { get; private set; }
+    public bool shootReleased { get; private set; }
+    public bool zoomPressed { get; private set; }
+    public bool zoomReleased { get; private set; }
     public bool activatePressed {get; private set; }
     public bool throwPressed {get; private set; }
+    public bool equip1pressed {get; private set; }
+    public bool equip2pressed {get; private set; }
+    public bool equip3pressed {get; private set; }
 
 
     private bool clear;
@@ -63,10 +71,23 @@ public class PlayerInput : MonoBehaviour
 
         sprintHeld = sprintHeld || Input.GetButton("Sprint");
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
+        jumpReleased = jumpReleased || Input.GetButtonUp("Jump");
 
         shootPressed = shootPressed || Input.GetButtonDown("Fire1");
+        shootHeld = Input.GetButton("Fire1");
+        shootReleased = shootReleased || Input.GetButtonUp("Fire1");
+
+        zoomPressed = zoomPressed || Input.GetButtonDown("Fire2");
+        zoomReleased = zoomReleased || Input.GetButtonDown("Fire2");
+
         activatePressed = activatePressed || Input.GetButtonDown("Interact");
         throwPressed = throwPressed || Input.GetButtonDown("Throw");
+
+        equip1pressed = equip1pressed || Input.GetKeyDown(KeyCode.Alpha1);
+        equip2pressed = equip2pressed || Input.GetKeyDown(KeyCode.Alpha2);
+        equip3pressed = equip3pressed || Input.GetKeyDown(KeyCode.Alpha3);
+
+
     }
 
     private void ClearInputs()
@@ -81,9 +102,23 @@ public class PlayerInput : MonoBehaviour
 
         sprintHeld = false;
         jumpPressed = false;
+        jumpReleased = false;
 
         shootPressed = false;
+        shootReleased = false;
+
+        if (Input.GetButton("Fire2"))
+            zoomPressed = true;
+        else
+            zoomPressed = false;
+
+        zoomReleased = false;
+
         activatePressed = false;
         throwPressed = false;
+
+        equip1pressed = false;
+        equip2pressed = false;
+        equip3pressed = false;
     }
 }

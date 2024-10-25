@@ -30,10 +30,10 @@ public class CameraMovement : MonoBehaviour
         //Up and Down camera movements
         camXRotation += Time.deltaTime * input.mouseY * turnSpeed * (invertMouse ? 1 : -1);
         camXRotation = Mathf.Clamp(camXRotation, -75f, 75f);
-
+/*
         camYRotation += Time.deltaTime * input.mouseX * turnSpeed;
-
-        transform.localRotation = Quaternion.Euler(camXRotation, camYRotation, transform.localRotation.z);
+*/
+        transform.localRotation = Quaternion.Euler(camXRotation, transform.localRotation.y, transform.localRotation.z);
     }
 
     //A method to lock and unlock the cursor in runtime depending if they are in game or in menu
