@@ -21,7 +21,10 @@ public class Health : MonoBehaviour
 
     public void ResetHealth() {
         health = maxHealth;
-        OnHealthUpdate(maxHealth);
+        if(OnHealthUpdate != null)
+        {
+            OnHealthUpdate(maxHealth);
+        }
         isDead = false;
         // OnRestart();
     }
