@@ -43,6 +43,6 @@ public class BombInteractor : Interactor
 
     public override void OnStart()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

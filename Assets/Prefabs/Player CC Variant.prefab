@@ -955,6 +955,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.728213, y: 0.51636946, z: 0.409298}
   m_Center: {x: 0.04323088, y: 0.036775053, z: 0.0076386007}
+--- !u!1 &7078548795407314434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8274979687327697885}
+  m_Layer: 0
+  m_Name: BombAttachPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8274979687327697885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078548795407314434}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
+  m_LocalPosition: {x: -0.58, y: 0.36, z: 0.81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5253490257035509239}
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
 --- !u!1 &8310713150148835252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1039,7 @@ GameObject:
   - component: {fileID: 6977856052590132564}
   - component: {fileID: 8747508833220065474}
   - component: {fileID: 1326504384116413830}
+  - component: {fileID: 6832237024169804869}
   m_Layer: 0
   m_Name: Player CC Variant
   m_TagString: Player
@@ -1032,6 +1064,7 @@ Transform:
   - {fileID: 156728982021838702}
   - {fileID: 6280138504436164833}
   - {fileID: 5167767400619138469}
+  - {fileID: 8274979687327697885}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2793149246461569748
@@ -1131,13 +1164,14 @@ MonoBehaviour:
   characterController: {fileID: 2793149246461569748}
   cam: {fileID: 0}
   moveSpeed: 5
+  maxMoveSpeed: 0
   sprintMultiplier: 2
   gravity: -9.81
   gravityMult: 2
   minGravityMult: 2
   maxGravityMult: 4
   input: {fileID: 0}
-  groundCheck: {fileID: 6280138504436164833}
+  groundCheckPos: {fileID: 0}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -1225,6 +1259,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomFOV: 50
   FOV: 70
+--- !u!114 &6832237024169804869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571827124357022599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9771064ae12ea740aaf26dff21277d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerEye: {fileID: 136082027812371145}
+  attachPoint: {fileID: 8274979687327697885}
+  checkRadius: 2.5
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  throwVelocity: 15
 --- !u!1 &8655275662355958803
 GameObject:
   m_ObjectHideFlags: 0
